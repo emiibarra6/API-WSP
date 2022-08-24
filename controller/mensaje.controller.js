@@ -66,12 +66,43 @@ const actualizarMensaje = async (req,res) => {
 
 }
 
-const borrarMensaje = (req,res) => {
+const borrarMensaje = async (req,res) => {
+    const { id } = req.params;
+    try {
+        if(!req.usuario){
+            return res.status(400).json({msg:'Error en tokeen'});
+        }
+
+        //Obtenemos el mensaje:
+        const obtenerMensajeBorrar = await Mensaje.findById(id);
+
+        //Chekeamos que el mensaje sea del que inicio sesion:
+        if(obtenerMensajeBorrar.origen.toString() !== req.usuario._id.toString()){
+            return res.status(400).json({msg: 'Tu no tienes permiso para borrar éste mensaje'});
+        }
+
+        //Boramos el msj:
+        obtenerMensajeBorrar.remove();
+        res.status(200).json({msg:'El mensaje se borro correctamente'});
+
+    } catch (error) {
+        console.log(error);
+    }
 
 }
 
-const obtenerMensaje = (req,res) => {
+const obtenerMensaje = async (req,res) => {
+    const { id } = req.params;
+    try {
+        const mensaje = await Mensaje.findById(id);
+        if(!mensaje){
+            return res.status(400).json({msg:'Error no existe el msj'});
+        }
 
+        res.json(mensaje);
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 export {
