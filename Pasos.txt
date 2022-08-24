@@ -1,0 +1,40 @@
+INSTALAMOS LAS SIGUIENTES DEPENDENCIA:
+------------------------------------------DEPENDENCIAS----------------------------------
+npm i express dotenv mongoose jsonwebtoken cors mailtrap
+npm i nodemon --save-dev
+
+luego al estar haciendo los modelos, recorde istalar:
+npm i bcrypt
+------------------------------------------ FIN DEPENDENCIAS----------------------------------
+
+
+------------------------------------------- ROUTES -----------------------------------------
+1-. Creo el index del routes, para tener una mejor modularizacion del codigo
+2-. Luego creo las dos rutas sobre las entidades que son en éste caso Mensaje y Usuario
+3-. Creo los ENDPOINTS para cada CRUD
+
+----------------------------------- ------ FIN ROUTES -----------------------------------------
+
+------------------------------------------- MODELOS -----------------------------------------
+en models Usuario.model.js cuando se genera un nuevo usuario se generar un token y se envia un mail para confirmar la cuenta.
+
+Usuario:
+Tenemos que utilizar un method de mongoose 'save' para hashear la contraseña antes de guardar en la bd, para esto, usamos bcrypt 
+en la documentacion recomidan usar async await, primero verificamos si ya esta hasheada la contraseña, no volver a hashear.
+
+Mensaje:
+Simple tenemos el texto que queremos enviar, el destino y luego el origen es el usuario loggeado.
+------------------------------------------- FIN MODELOS -----------------------------------------
+
+
+
+------------------------------------------- CONTROLLERS -----------------------------------------
+1-. Creo los controller para las dos entidades:
+2-. 
+
+
+----------------------------------- ------ FIN CONTROLLERS -----------------------------------------
+
+
+
+
